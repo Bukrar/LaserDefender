@@ -7,20 +7,36 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] List<WaveConfig> waveConfigs;
     int startingWave = 0;
-    void Start()
+    [SerializeField] bool looping = false;
+    IEnumerator Start()
     {
-        var currentWave = waveConfigs[startingWave];
-        StartCoroutine(SpawnAllEnemyiesInWave(currentWave));
+        do
+        {
+            yield return StartCoroutine(SpawnAllWave());
+        }
+        while (looping);
+
     }
+
+    private IEnumerator SpawnAllWave()
+    {
+        for (int waveIndex = startingWave; waveIndex < waveConfigs.Count; waveIndex++)
+        {
+            var currentWave = waveConfigs[waveIndex];
+            yield return StartCoroutine(SpawnAllEnemyiesInWave(currentWave));
+        }
+    }
+
     private IEnumerator SpawnAllEnemyiesInWave(WaveConfig waveConfig)
     {
         for (int enemyCount = 0; enemyCount < waveConfig.GetNumberOfEnemies(); enemyCount++)
         {
-            Instantiate(
-                waveConfig.GetEnemyPrefab(),
-                waveConfig.GetWayPoints()[0].transform.position,
-                Quaternion.identity
-                );
+            var newEnemy = Instantiate(
+                 waveConfig.GetEnemyPrefab(),
+                 waveConfig.GetWayPoints()[0].transform.position,
+                 Quaternion.identity
+                 );
+            newEnemy.GetComponent<EnemyPathing>().SetWaveConfig(waveConfig);
             yield return new WaitForSeconds(waveConfig.GetTimeBetweenSpawns());
         }
     }
