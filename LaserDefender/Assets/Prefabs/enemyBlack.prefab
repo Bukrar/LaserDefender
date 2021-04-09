@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5032158733218189647}
   - component: {fileID: 8899232833104363642}
   - component: {fileID: -8771710927295407913}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: enemyBlack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,6 +110,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  shotCounter: 100
+  minTimeBetweenShots: 0.2
+  maxTimeBetweenShots: 3
+  enemyLaser: {fileID: 2372017383962531168, guid: 3abb1af38fabb4b4cb36d17a3b49ddf0,
+    type: 3}
+  projecttileSpeed: 10
 --- !u!58 &-8771710927295407913
 CircleCollider2D:
   m_ObjectHideFlags: 0

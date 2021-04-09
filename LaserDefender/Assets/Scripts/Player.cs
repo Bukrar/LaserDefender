@@ -11,8 +11,12 @@ public class Player : MonoBehaviour
     float yMax;
     Coroutine fireCoroutine;
 
+    [Header("Player")]
     [SerializeField] float moveSpeed = 10F;
     [SerializeField] float paddle = .5F;
+    [SerializeField] int health = 200;
+
+    [Header("Player Projecttile")]
     [SerializeField] GameObject laserPrefab;
     [SerializeField] float projecttileSpeed = 10F;
     void Start()
@@ -25,13 +29,30 @@ public class Player : MonoBehaviour
         Fire();
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
+        if (!damageDealer) { return; }
+        ProcessHit(damageDealer);
+    }
+
+    private void ProcessHit(DamageDealer damageDealer)
+    {
+        health -= damageDealer.GetDamage();
+        damageDealer.Hit();
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Fire()
     {
         if (Input.GetButtonDown("Fire1"))
         {
             fireCoroutine = StartCoroutine(FireContinuously());
         }
-        if(Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1"))
         {
             StopCoroutine(fireCoroutine);
         }
@@ -39,7 +60,7 @@ public class Player : MonoBehaviour
 
     IEnumerator FireContinuously()
     {
-        while(true)
+        while (true)
         {
             GameObject laser = Instantiate(
                 laserPrefab,
