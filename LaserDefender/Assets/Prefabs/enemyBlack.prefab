@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5032158733218189647}
   - component: {fileID: 8899232833104363642}
   - component: {fileID: -8771710927295407913}
+  - component: {fileID: 8487238720369218477}
+  - component: {fileID: 4231974199985149192}
   m_Layer: 7
   m_Name: enemyBlack
   m_TagString: Untagged
@@ -116,6 +118,13 @@ MonoBehaviour:
   enemyLaser: {fileID: 2372017383962531168, guid: 3abb1af38fabb4b4cb36d17a3b49ddf0,
     type: 3}
   projecttileSpeed: 10
+  deathVFX: {fileID: 6849151025415085155, guid: ee83012c0fff17947993ed5de3b1853b,
+    type: 3}
+  durationOfExplosion: 1
+  deathSound: {fileID: 8300000, guid: 017f45e0fcebb7e43810aa8612cb6bfc, type: 3}
+  deathSoundVolume: 0.568
+  shootSound: {fileID: 8300000, guid: 2ded3986a202eb84d8733a7d342c538c, type: 3}
+  shootSoundVolume: 0.379
 --- !u!58 &-8771710927295407913
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -126,9 +135,43 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.52
+--- !u!50 &8487238720369218477
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4955570942697381131}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &4231974199985149192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4955570942697381131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 663b5739fcc19f34893ec4c96c3312c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 200
