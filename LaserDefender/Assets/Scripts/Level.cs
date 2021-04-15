@@ -13,7 +13,12 @@ public class Level : MonoBehaviour
     public void LoadGame()
     {
         SceneManager.LoadScene("SpaceGame");
-    } 
+        GameSession myGame = FindObjectOfType<GameSession>();
+        if (myGame != null)
+        {
+            myGame.ResetGame();
+        }
+    }
     public void LoadGameOver()
     {
         StartCoroutine(WaitAndLoad());
